@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 22
+        versionCode 5
+        versionName "1.4"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.WheelProgress'
+version='1.0.0'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateSourcesJar
+}
+
+
+
+bintray{
+    user = 'dvinz26'
+    key = 'af2637e3ef68cd0eb08b39e9e06a437b33bd887a'
+    pkg {
+        repo = 'maven'
+        name = 'com.github.WheelProgress'
+
+        version {
+            name = '1.0.0'
+            desc = 'My test upload'
+            released  = new Date()
+            vcsTag = '1.0.0'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/PatelMilan/WheelProgress.git'
+        websiteUrl = 'https://github.com/PatelMilan/WheelProgress'
+    }
+    configurations = ['archives']
+}

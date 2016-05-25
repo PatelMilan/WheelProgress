@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WheelProgress">
+        <attr name="progressIndeterminate" format="boolean" />
+        <attr name="colorOfBar" format="color" />
+        <attr name="colorOfRim" format="color" />
+        <attr name="widthOfRim" format="dimension" />
+        <attr name="speedOfSpin" format="float" />
+        <attr name="timeOfSpinBarCycle" format="integer" />
+        <attr name="radiusOfCircle" format="dimension" />
+        <attr name="radiusOfFill" format="boolean" />
+        <attr name="widthOfBar" format="dimension" />
+        <attr name="progressOfLinear" format="boolean" />
+    </declare-styleable>
+
+</resources>
